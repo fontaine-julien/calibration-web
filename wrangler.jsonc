@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pystats-calibration-api",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-11-08",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  "vars": {
+    "PUBLIC_ORIGIN": "https://fontaine-julien.github.io",
+    "CONTACT_EMAIL": "",
+    "RETENTION_DAYS": "180",
+    "PRIVACY_REVIEWED": "false"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "pystats-calibration",
+    "database_id": "becdeeb8-bc78-455b-8960-b8ab6e6358f6",
+    "migrations_dir": "migrations"
+  }],
+  "triggers": { "crons": ["17 3 * * *"] }
+}

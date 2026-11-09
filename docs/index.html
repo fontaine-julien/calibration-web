@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://*.workers.dev http://127.0.0.1:8787; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="Une exploration du temps nécessaire pour copier un nombre et rappeler un fait numérique. Un protocole PyStats proposé par Julien Fontaine.">
+  <title>Copier. Rappeler. — Étalonnage PyStats</title>
+  <link rel="canonical" href="https://fontaine-julien.github.io/calibration-web/">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="masthead wrap">
+    <a class="brand" href="./"><span class="brand-mark" aria-hidden="true">P<span>·</span></span> PyStats <span class="brand-sub">/ Étalonnage</span></a>
+    <nav aria-label="Navigation"><a href="#protocole">Le protocole</a><a href="#donnees">Mes données</a><a data-project href="https://github.com/fontaine-julien/pystats" target="_blank" rel="noopener noreferrer">Le projet ↗</a></nav>
+  </header>
+  <main class="wrap" id="home">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> Une exploration du rappel en mémoire</p>
+        <h1 id="title">Copier.<br>Rappeler.<br><em>Mesurer l’écart.</em></h1>
+        <p class="lead">Voir un nombre et le recopier. Voir une multiplication et retrouver son résultat. Combien de temps sépare ces deux gestes&nbsp;?</p>
+        <p class="intro-note">Contribuez à un étalonnage exploratoire du projet PyStats, proposé par Julien Fontaine. Il ne s’agit ni d’un test de QI, ni d’un diagnostic, ni d’un classement.</p>
+        <a class="text-link" href="#participer">Comprendre et participer <span aria-hidden="true">↓</span></a>
+      </div>
+      <aside class="protocol-card" aria-label="Les deux étapes du test">
+        <div class="card-label">LE MÊME PROTOCOLE POUR TOUS <span>01 / 02</span></div>
+        <div class="stage"><div class="stage-number">50</div><div><strong>Nombres à recopier</strong><p>Lire. Saisir. Valider.</p></div></div>
+        <div class="pause-line"><span>Une pause entre les deux blocs</span></div>
+        <div class="stage"><div class="stage-number">50</div><div><strong>Multiplications à résoudre</strong><p>Retrouver. Saisir. Valider.</p></div></div>
+        <div class="card-foot">Tables de 1 à 10 <span>·</span> Pavé numérique requis</div>
+      </aside>
+    </section>
+    <section class="explanation" id="protocole" aria-labelledby="why-title">
+      <div><p class="eyebrow">Pourquoi cette mesure ?</p><h2 id="why-title">Distinguer le geste<br>du rappel.</h2></div>
+      <div class="explanation-copy"><p>La vitesse de frappe varie d’une personne à l’autre. Le premier bloc fournit un point de comparaison personnel. Le second ajoute la recherche du résultat d’une multiplication.</p><p>Nous comparons le temps jusqu’à la <strong>dernière frappe de saisie</strong>, sur les mêmes produits et uniquement pour les paires réussies dans les deux blocs. La touche Entrée fait passer à la suite, mais son délai n’entre pas dans cette moyenne.</p><p class="muted">L’écart observé dépend aussi de la lecture, de l’attention, de l’entraînement et de l’ordre des blocs. Il ne prouve pas, à lui seul, qu’une réponse a été retrouvée par cœur.</p></div>
+    </section>
+    <section class="participation" id="participer" aria-labelledby="participation-title">
+      <div class="instructions"><p class="eyebrow">Avant de commencer</p><h2 id="participation-title">Quelques minutes.<br>Toute votre attention.</h2>
+        <ol class="steps"><li><strong>Installez-vous au calme.</strong><span>Un ordinateur, un clavier avec pavé numérique à droite et le verrouillage numérique activé. Pas de téléphone.</span></li><li><strong>Répondez vite et juste, sans aide.</strong><span>Chiffres et Entrée du pavé numérique. Retour arrière pour corriger. Aucun retour sur la justesse pendant le test.</span></li><li><strong>Gardez le même équipement.</strong><span>Une pause est prévue après les 50 copies. Chaque bloc se déroule sans interruption. Quitter l’écran ou changer d’onglet interrompt la passation.</span></li></ol>
+        <p class="small">Votre participation est volontaire. Vous pouvez arrêter à tout moment. Les essais incomplets restent identifiés comme tels ; vous pouvez aussi demander leur suppression.</p>
+      </div>
+      <form id="join-form" class="join-card">
+        <p class="eyebrow">Votre invitation personnelle</p>
+        <label for="invitation" class="field-label">Code de participation</label>
+        <input id="invitation" name="invitation" type="password" maxlength="43" autocomplete="off" spellcheck="false" required placeholder="Collez le code reçu">
+        <p class="small">Un code, une seule passation. Aucun nom, adresse mail ou résultat de QI ne vous sera demandé.</p>
+        <div class="privacy-summary"><strong>Vos réponses restent privées.</strong><p>Julien Fontaine les utilise pour étudier l’écart entre copie et restitution. Elles sont conservées au maximum <span data-retention>180</span> jours dans une base Cloudflare protégée, avec un identifiant aléatoire. Elles ne sont pas publiées sur GitHub.</p><a href="#confidentialite">Lire la notice de confidentialité ↓</a></div>
+        <label class="check"><input id="adult" type="checkbox" required><span>Je confirme avoir 18 ans ou plus.</span></label>
+        <label class="check"><input id="consent" type="checkbox" required><span>J’ai lu la notice et j’accepte que mes réponses et leurs temps soient utilisés pour cet étalonnage exploratoire. Je peux retirer mon consentement à tout moment.</span></label>
+        <button id="join" class="primary" type="submit" disabled>Préparer ma passation <span aria-hidden="true">→</span></button>
+        <p id="availability" class="status small" role="status">Vérification de l’ouverture des participations…</p>
+      </form>
+    </section>
+    <section id="confidentialite" class="privacy-section" aria-labelledby="privacy-title">
+      <p class="eyebrow">Une participation éclairée</p><h2 id="privacy-title">Vos données, votre choix.</h2>
+      <details open><summary>L’essentiel sur la collecte</summary><div class="detail-body">
+        <p><strong>Responsable :</strong> Julien Fontaine. <span data-contact>Aucun canal de contact direct avec le responsable n’est proposé sur ce site. L’espace « Mes données » permet le téléchargement et la suppression avec votre clé personnelle.</span></p>
+        <p><strong>Finalité et base légale :</strong> sur la base de votre consentement, comparer les temps de copie et de restitution des tables chez des adultes volontaires, examiner la variabilité des écarts et améliorer ce protocole exploratoire. Aucune décision scolaire, médicale ou professionnelle n’est prise à partir de ce test.</p>
+        <p><strong>Données enregistrées :</strong> identifiant aléatoire, preuve et version du consentement, date de passation, items affichés, réponses, frappes utiles et corrections avec leurs délais relatifs, pause entre blocs, statut et motif d’interruption. Les touches étrangères au test ne sont pas enregistrées. Nous ne demandons ni identité civile, ni âge précis, ni coordonnées, ni données de santé.</p>
+        <p>Ces données sont <strong>pseudonymisées, pas nécessairement anonymes</strong> : l’organisateur peut connaître le destinataire d’une invitation. Le code d’invitation est enregistré sous forme d’empreinte, pas en clair.</p>
+      </div></details>
+      <details><summary>Stockage, destinataires et durée</summary><div class="detail-body">
+        <p>Les données sont accessibles à Julien Fontaine et aux prestataires techniques nécessaires au fonctionnement du service. Les réponses transitent en HTTPS vers Cloudflare Workers et sont enregistrées dans une base D1 privée. GitHub Pages héberge uniquement les fichiers publics du site. Aucun envoi automatique des résultats par mail n’est effectué.</p>
+        <p>La base doit être créée avec la juridiction <strong>Union européenne</strong>. Cette restriction concerne la base ; les réseaux GitHub et Cloudflare restent mondiaux. Ils peuvent traiter des données techniques, notamment l’adresse IP, pour fournir et sécuriser leurs services. L’application ne copie pas les adresses IP dans sa base de résultats. Leurs conditions et mécanismes de transfert s’appliquent : <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub</a> et <a href="https://www.cloudflare.com/cloudflare-customer-dpa/" target="_blank" rel="noopener noreferrer">Cloudflare</a>.</p>
+        <p><strong>Conservation :</strong> au maximum <span data-retention>180</span> jours à compter du consentement, puis suppression automatique quotidienne. Une suppression demandée prend effet immédiatement dans la base active ; les sauvegardes techniques peuvent subsister jusqu’à leur expiration selon les conditions du prestataire. Les copies exportées par le responsable suivent la même durée et les mêmes demandes d’effacement. Un journal minimal (identifiant et date de suppression) reste accessible au responsable jusqu’à l’échéance initiale, pour retirer aussi les copies exportées. Les invitations non utilisées expirent après 30 jours.</p>
+        <p>Aucun résultat individuel ni jeu de réponses n’est rendu public. Une éventuelle communication de résultats porte uniquement sur des statistiques suffisamment agrégées pour ne pas identifier les participants.</p>
+      </div></details>
+      <details><summary>Accéder, retirer son consentement, supprimer</summary><div class="detail-body">
+        <p>Vous pouvez refuser de participer, arrêter la passation et retirer votre consentement sans justification. Ce retrait ne remet pas en cause les traitements licites effectués auparavant.</p>
+        <p>Une <strong>clé personnelle de gestion des données</strong> vous est remise au démarrage. Conservez-la : l’espace ci-dessous permet de télécharger vos données ou de retirer votre consentement et les supprimer sans créer de compte. Ne communiquez cette clé à personne.</p>
+        <p>Vos droits comprennent l’accès, la rectification, l’effacement, la limitation du traitement et la portabilité lorsqu’elle s’applique. Ce site automatise uniquement le téléchargement et la suppression ; il ne propose pas de formulaire de rectification ou de limitation. Sans votre clé, il peut être impossible de retrouver votre passation. Vous pouvez adresser une réclamation à la <a href="https://www.cnil.fr/fr/adresser-une-plainte" target="_blank" rel="noopener noreferrer">CNIL</a>.</p>
+        <p>Pas de publicité, de mesure d’audience ou de traceur tiers dans l’application. Le stockage de session du navigateur sert uniquement à gérer la passation et vos clés ; il est propre à cet onglet et peut être effacé depuis l’espace ci-dessous.</p>
+      </div></details>
+    </section>
+    <section id="donnees" class="rights-section" aria-labelledby="rights-title">
+      <div><p class="eyebrow">Après ou pendant votre participation</p><h2 id="rights-title">Mes données.</h2><p>Votre clé donne accès à votre seule passation.</p></div>
+      <div class="rights-form"><label class="field-label" for="rights-key">Clé personnelle de gestion des données</label><input id="rights-key" type="password" maxlength="43" autocomplete="off" spellcheck="false" placeholder="La clé remise au démarrage"><div class="actions"><button id="get-data" class="secondary" type="button">Télécharger mes données</button><button id="delete-data" class="text-button danger" type="button">Retirer mon accord et supprimer</button></div><button id="clear-local" type="button" class="text-button small">Effacer les clés de cet onglet</button><p id="rights-status" role="status" class="small"></p></div>
+    </section>
+  </main>
+  <section id="test-screen" hidden aria-label="Passation" tabindex="-1">
+    <div class="test-top"><span id="test-phase">Préparation</span><span id="test-progress"></span></div>
+    <div class="test-center">
+      <div id="prep-panel"><p class="eyebrow">Votre invitation est réservée</p><h2 id="prep-title">Vérifiez votre pavé numérique.</h2><p id="prep-text">Appuyez sur le chiffre 4 du pavé numérique, puis sur son Entrée.</p><output id="practice-output" aria-label="Saisie de vérification">—</output><div class="receipt-box"><p>Conservez votre clé de gestion pour accéder à vos données ou les supprimer après le test.</p><button id="save-key" type="button" class="secondary">Enregistrer ma clé personnelle</button><p class="small">Le fichier téléchargé est privé. Gardez-le pour vous.</p></div><button id="begin-block" type="button" class="primary" disabled>Commencer les 50 copies</button><button id="cancel-prep" type="button" class="text-button">Arrêter ici</button><p id="prep-status" role="status" class="small"></p></div>
+      <div id="item-panel" hidden><p id="stimulus" aria-label="Item à traiter"></p><output id="answer" aria-label="Votre réponse">&nbsp;</output><p id="limit-note" class="small" aria-live="polite"></p></div>
+      <div id="message-panel" hidden><p class="eyebrow" id="message-label"></p><h2 id="message-title"></h2><p id="message-text"></p><div id="result-grid"></div><button id="message-action" class="primary" type="button"></button><button id="message-home" class="text-button" type="button">Retour à la page d’accueil et à mes données</button></div>
+    </div>
+    <div class="test-bottom"><span id="test-hint">Pavé numérique uniquement · Retour arrière pour corriger</span><span>Échap : quitter / interrompre</span></div>
+  </section>
+  <footer class="wrap"><p>© 2026 Julien Fontaine <span>·</span> <a href="LICENSE.txt">Code sous licence MIT</a></p><div><a data-profile href="https://github.com/fontaine-julien" target="_blank" rel="noopener noreferrer">Julien Fontaine ↗</a><a data-project href="https://github.com/fontaine-julien/pystats" target="_blank" rel="noopener noreferrer">Projet PyStats ↗</a></div><p class="footer-note">Vous pouvez réutiliser et modifier le code en conservant la notice MIT. Cette licence ne donne aucun accès aux données des participants.</p></footer>
+  <noscript><p class="wrap">JavaScript est nécessaire pour la passation. Aucune participation n’est enregistrée sans votre consentement explicite.</p></noscript>
+</body>
+</html>
