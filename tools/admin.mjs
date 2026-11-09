@@ -7,6 +7,7 @@ import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {randomBytes} from 'node:crypto';
 import {SITE} from '../docs/config.js';
+import {requestApi} from './network.mjs';
 
 async function ask(label) {
   const rl=createInterface({input:stdin,output:stdout});
@@ -42,12 +43,14 @@ try {
     console.log('PyStats · administration privée du mini-test\n');
     const base=(SITE.apiBase || await ask('Adresse HTTPS du Worker : ')).replace(/\/$/,'');
     if (!/^https:\/\/[a-z0-9.-]+(?::\d+)?$/i.test(base)) throw new Error('Adresse HTTPS du Worker invalide.');
+    console.log(`Serveur : ${base}`);
+    const configuration=await (await requestApi(base,'/config')).json();
+    console.log('Connexion au Worker réussie.');
+    if(!configuration.ready) console.log('Les nouvelles invitations sont fermées : vérifiez PRIVACY_REVIEWED et les réglages, puis redéployez le Worker.');
     const secret=await hidden('Secret ADMIN_TOKEN (saisie masquée) : ');
     if (secret.length<32) throw new Error('Secret trop court.');
     async function api(path,body) {
-      const response=await fetch(`${base}${path}`,{method:body===undefined?'GET':'POST',headers:{Authorization:`Bearer ${secret}`,...(body===undefined?{}:{'Content-Type':'application/json'})},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(30000)});
-      if (!response.ok) throw new Error((await response.json()).error || `Erreur ${response.status}`);
-      return response;
+      return requestApi(base,path,{body,key:secret});
     }
     let running=true;
     while(running) {

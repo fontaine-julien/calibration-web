@@ -10,7 +10,7 @@
     "PUBLIC_ORIGIN": "https://fontaine-julien.github.io",
     "CONTACT_EMAIL": "",
     "RETENTION_DAYS": "180",
-    "PRIVACY_REVIEWED": "false"
+    "PRIVACY_REVIEWED": "true"
   },
   "d1_databases": [{
     "binding": "DB",

@@ -73,7 +73,7 @@ La première commande ouvre la connexion Cloudflare. La seconde crée les tables
 Le déploiement affiche une adresse de ce type :
 
 ```text
-https://pystats-calibration-api.VOTRE-SOUS-DOMAINE.workers.dev
+https://pystats-calibration-api.julien-fontaine.workers.dev
 ```
 
 Le serveur ne propose pas de page web à sa racine : un refus sans clé sur `/` est normal. Son adresse `/config` fournit uniquement la configuration publique et l’état d’ouverture.
@@ -98,10 +98,14 @@ Sources : [D1 et migrations](https://developers.cloudflare.com/d1/reference/migr
 Dans `docs/config.js`, renseigner `apiBase` avec l’adresse HTTPS du Worker, sans barre finale. Les liens vers PyStats et le profil GitHub sont déjà renseignés d’après le README officiel du projet.
 
 ```javascript
-apiBase: 'https://pystats-calibration-api.VOTRE-SOUS-DOMAINE.workers.dev',
+apiBase: 'https://pystats-calibration-api.julien-fontaine.workers.dev',
 ```
 
 Cette adresse n’est pas secrète. Les mots de passe et les réponses le sont, et ne doivent jamais être ajoutés à ce fichier.
+
+Le sous-domaine Cloudflare est **`julien-fontaine`**, alors que le compte GitHub est **`fontaine-julien`**. Ne pas les intervertir. Si l’outil indique une erreur DNS (`ENOTFOUND`), vérifier cette adresse. L’administration teste désormais `/config` sans secret avant de demander `ADMIN_TOKEN` et distingue les problèmes de connexion des refus d’authentification.
+
+État local au 9 novembre : `apiBase` est renseigné avec l’adresse ci-dessus, dont `/config` répond HTTP 200. `PRIVACY_REVIEWED` est passé à `true` pour permettre la création des invitations demandée par l’organisateur ; **un nouveau `wrangler deploy` est nécessaire** pour appliquer ce changement. Le serveur interrogé avant ce redéploiement annonçait encore `ready: false`.
 
 La politique de sécurité de `docs/index.html` autorise les API `workers.dev`. Si vous changez pour un domaine personnalisé, il faudra adapter précisément `connect-src`. L’adresse locale autorisée dans la version de développement peut être retirée lors de la publication.
 

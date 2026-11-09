@@ -4,6 +4,7 @@ import {readFileSync,readdirSync} from 'node:fs';
 import worker,{token,cleanup} from '../worker/index.mjs';
 import {generateProtocol,validateAnswer,summarize} from '../worker/protocol.mjs';
 import {database} from './d1-adapter.mjs';
+import {SITE} from '../docs/config.js';
 
 function fixture() {
   const env = {DB:database(),ADMIN_TOKEN:token(),PUBLIC_ORIGIN:'https://test.example',CONTACT_EMAIL:'contact@example.org',RETENTION_DAYS:'180',PRIVACY_REVIEWED:'true'};
@@ -203,7 +204,13 @@ test('public directory contains no database, server module, credentials or proto
   const files=readdirSync(new URL('../docs/',import.meta.url));
   assert.ok(!files.some(f=>/\.(sql|sqlite|csv|mjs)$/.test(f)));
   const config=readFileSync(new URL('../docs/config.js',import.meta.url),'utf8');
-  assert.match(config,/apiBase: ''/);
+  assert.ok(config.includes('apiBase'));
+  if (SITE.apiBase) {
+    const endpoint=new URL(SITE.apiBase);
+    assert.equal(endpoint.protocol,'https:');
+    assert.equal(endpoint.username+endpoint.password+endpoint.search+endpoint.hash,'');
+    assert.equal(endpoint.pathname,'/');
+  }
   const app=readFileSync(new URL('../docs/app.js',import.meta.url),'utf8');
   assert.ok(!app.includes('generateProtocol')); assert.ok(!app.includes('ADMIN_TOKEN'));
   const html=readFileSync(new URL('../docs/index.html',import.meta.url),'utf8');
