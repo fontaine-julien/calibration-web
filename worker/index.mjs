@@ -1,7 +1,7 @@
 import {generateProtocol, publicItem, validateAnswer, summarize} from './protocol.mjs';
 
 const DAY = 86400000;
-export const NOTICE_VERSION = '2026-11-08.2';
+export const NOTICE_VERSION = '2026-11-10.1';
 const tokenPattern = /^[A-Za-z0-9_-]{43}$/;
 export function token() {
   return btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(32))))

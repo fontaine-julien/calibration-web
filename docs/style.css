@@ -13,3 +13,4 @@ ol li span {
   text-align: justify;
   hyphens: auto;
 }
+#consent + span { text-align: justify; hyphens: auto; }
